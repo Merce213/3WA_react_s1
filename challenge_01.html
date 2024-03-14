@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+        <!-- babel => compilation du JSX -->
+        <script src="https://unpkg.com/babel-standalone@latest/babel.min.js"></script>
+        <title>Events react</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            const Compteur = ({ step = 1 }) => {
+                const [count, setCount] = React.useState(0);
+                const [isRunning, setIsRunning] = React.useState(false);
+
+                React.useEffect(() => {
+                    if (isRunning && count < 20) {
+                        const timeoutId = setTimeout(() => {
+                            setCount((count) => count + step);
+                        }, 1000);
+
+                        return () => {
+                            clearTimeout(timeoutId);
+                        };
+                    }
+                }, [isRunning, count]);
+
+                const startIncrement = () => {
+                    setIsRunning(true);
+                };
+
+                const stopIncrement = () => {
+                    setIsRunning(false);
+                };
+
+                return (
+                    <div>
+                        <button onClick={startIncrement} disabled={isRunning}>
+                            Start
+                        </button>
+                        <button onClick={stopIncrement} disabled={!isRunning}>
+                            Stop
+                        </button>
+                        <p>Compteur : {count}</p>
+                    </div>
+                );
+            };
+
+            const App = () => {
+                return (
+                    <div>
+                        <Compteur />
+                        <Compteur step={2} />
+                    </div>
+                );
+            };
+
+            ReactDOM.createRoot(document.getElementById("root")).render(
+                <App />
+            );
+        </script>
+    </body>
+</html>

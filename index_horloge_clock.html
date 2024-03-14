@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@latest/babel.min.js"></script>
+        <title>React Présentation</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            /* const Clock = () => {
+                const date = new Date();
+
+                return (
+                    <div>
+                        <h1>Horloge</h1>
+                        <h2>Il est {date.toLocaleTimeString()}.</h2>
+                    </div>
+                );
+            };
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            setInterval(() => {
+                root.render(<Clock />);
+            }, 1000); */
+
+            // utilise une classe pour définir un composant
+            class Clock extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = { date: new Date() };
+                }
+
+                tick() {
+                    setTimeout(() => {
+                        this.setState({
+                            date: new Date(),
+                        });
+                    }, 1000);
+                }
+
+                render() {
+                    this.tick();
+                    return (
+                        <div>
+                            <h1>Horloge</h1>
+                            <h2>
+                                Il est {this.state.date.toLocaleTimeString()}.
+                            </h2>
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.createRoot(document.getElementById("root")).render(
+                <Clock />
+            );
+        </script>
+    </body>
+</html>
+
+<!-- const Clock = () => {
+        const [date, setDate] = React.useState(new Date());
+
+        React.useEffect(() => {
+            const timerID = setInterval(() => tick(), 1000);
+
+            return function cleanup() {
+                clearInterval(timerID);
+            };
+        });
+
+        const tick = () => {
+            setDate(new Date());
+        };
+
+        return (
+            <div>
+                <h1>Horloge</h1>
+                <h2>Il est {date.toLocaleTimeString()}.</h2>
+            </div>
+        );
+    };
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<Clock />); -->

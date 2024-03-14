@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@latest/babel.min.js"></script>
+        <title>React Présentation</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            // Component with children props
+            /* const Wrapper = ({ children }) => {
+                return (
+                    <div style={{ border: "1px solid #000", padding: "10px" }}>
+                        {children}
+                    </div>
+                );
+            };
+
+            // Component with props
+            const Nums = () => {
+                const numbers = [4, 3, 7];
+                return (
+                    <div>
+                        <h1>Numbers</h1>
+
+                        <ul>
+                            {numbers.map((number, index) => (
+                                <li key={index}>{number ** 3}</li>
+                            ))}
+                        </ul>
+                    </div>
+                );
+            }; */
+
+            const Messages = () => {
+                const MESSAGES = [
+                    { message: "React JS" },
+                    { message: "React Native" },
+                    { message: "Angular" },
+                    { message: "Symfony" },
+                    { message: "MongoDB" },
+                ];
+
+                return (
+                    <div>
+                        <Message messages={MESSAGES} />
+                    </div>
+                );
+            };
+
+            const Message = ({ messages }) => {
+                return (
+                    <div>
+                        <h1>Messages</h1>
+                        <ul>
+                            {messages.map((message, index) => (
+                                <li key={index}>{message.message}</li>
+                            ))}
+                        </ul>
+                    </div>
+                );
+            };
+
+            // Rendu dans le DOM
+            ReactDOM.createRoot(document.getElementById("root")).render(
+                <Messages />
+            );
+        </script>
+    </body>
+</html>

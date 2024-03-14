@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@latest/babel.min.js"></script>
+        <title>React Présentation</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            const products = [
+                { prices: [1.2, 1.1, 1.0], name: "apples" },
+                { prices: [1.8, 1.0, 1.9], name: "oranges" },
+                { prices: [1.0, 0.9, 1.1], name: "bananas" },
+            ];
+
+            const Fruit = ({ product }) => {
+                const avg =
+                    Math.floor(
+                        (product.prices.reduce((acc, curr) => acc + curr, 0) /
+                            product.prices.length) *
+                            10
+                    ) / 10;
+
+                return (
+                    <li>
+                        <h2>{product.name}</h2>
+                        <ul>
+                            <li>
+                                <p>prices :</p>
+                                <ul>
+                                    {product.prices.map((price, index) => (
+                                        <li key={index}>{price}</li>
+                                    ))}
+                                </ul>
+                            </li>
+                            <li>
+                                <p>average : {avg}</p>
+                            </li>
+                        </ul>
+                    </li>
+                );
+            };
+
+            const Fruits = () => {
+                return (
+                    <ul>
+                        {products.map((product, index) => (
+                            <Fruit key={index} product={product} />
+                        ))}
+                    </ul>
+                );
+            };
+
+            ReactDOM.createRoot(document.getElementById("root")).render(
+                <Fruits />
+            );
+        </script>
+    </body>
+</html>
